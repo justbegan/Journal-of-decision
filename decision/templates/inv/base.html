@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Журнал решений</title>
+   <link rel="shortcut icon" href="" type="image/x-icon">
+  </head>
+
+  {% load static %}
+
+  <style>
+      .hello-msg{
+      font-size:18px;
+      color:#fff;
+      margin-right:20px;
+      }
+
+  </style>
+
+
+
+  <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/container.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/pager.css' %}"/>
+  <link href="{% static 'fontawesome_free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'fontawesome_free/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesome_free/css/brands.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesome_free/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+  <style>
+ nav.navbar .dropdown:hover > .dropdown-menu {
+ display: block;}
+ .form111{display:none;}
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="{% static '/css/container.css' %}"/>
+
+  <body>
+
+
+
+
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'index' %}">
+          <img src="{% static '/images/logo.gif' %}" height="40px" href="{% url 'index' %}">
+    Журнал решений
+
+      </a>
+<div>
+
+
+</div>
+
+<div>
+
+
+</div>
+        <div class="add_buttons">
+
+    <div class="button-group">
+<nav class="navbar navbar-expand-lg">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+    <ul class="navbar-nav">
+
+      <li class="nav-item active">
+        <a class="btn btn-outline-primary" href="{% url 'index' %}">Главное меню <img src="{% static '/images/main.png'%}" height="20px"></a>
+      </li>
+
+
+
+
+      <li class="nav-item dropdown">
+        <a class="btn btn-outline-primary" href="{% url 'dis_decision' %}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Решения 
+          <img src="{% static '/images/decision.png'%}" height="20px">
+
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'add_decision' %}">Добавить</a>
+          <a class="dropdown-item" href="{% url 'dis_decision' %}">Список</a>
+          <a class="dropdown-item" href="{% url 'chrono' %}">Хронология</a>
+        </div>
+      </li>
+
+     <li class="nav-item dropdown">
+        <a class="btn btn-outline-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Классификаторы 
+          <img src="{% static '/images/class.png'%}" height="20px">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'dis_art_and_pens' %}">Основания приостановления</a>
+          <a class="dropdown-item" href="{% url 'cl_articles' %}">Статьи</a>
+          <a class="dropdown-item" href="#">Управление</a>
+          <a class="dropdown-item" href="#">Отделы</a>
+          <a class="dropdown-item" href="#">Улусы</a>
+          <a class="dropdown-item" href="{% url 'cl_pension_type' %}">Вид пенсии</a>
+
+
+        </div>
+      </li>
+
+
+
+              <li class="nav-item active">
+        <a class="btn btn-outline-primary" href="{% url 'dis_account' %}">Доступ <img src="{% static '/images/admin.png'%}" height="20px">  </a>
+      </li>
+
+    </ul>
+
+
+  </div>
+
+</nav>
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+      <div>
+
+</div>
+<div></div>
+<span >Привет ,{{request.user}} <a class ="btn btn-outline-primary btn-sm" href="{%url 'logout'%}">Выход 
+  <img src="{% static '/images/exit.png' %}" height="20px">
+</a> </span>
+</nav>
+    <br>
+
+
+
+    <div class="container">
+
+      {% block body %}
+      {% endblock%}
+
+
+
+
+
+
+
+
+    </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+
+
+<div class="pagination">
+    {% if items.has_previous %}
+    <a class="pagination-action" href="?page=1">
+        <i class="fa fa-angle-double-left" aria-hidden="true"></i> </a>
+    <a class="pagination-action" href="?page={{ items.previous_page_number }}">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </a>
+    {% endif %}
+    {% for num in items.paginator.page_range %}
+        {% if items.number == num %}
+            <span class="pagination-number pagination-current">{{ num }}</span>
+        {% elif num > items.number|add:'-3' and num < items.number|add:'3' %}
+            <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    {% if items.has_next %}
+        <a class="pagination-action" href="?page={{ items.next_page_number }}">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ items.paginator.num_pages }}">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+    {% endif %}
+</div>
+
+
+
+
+  </div>
+
+
+
+
+    <script src="{% static  'js/js.js'%}"></script>
+    <script src="{% static  'js/con_FIO.js'%}"></script>
+    <script src="{% static  'js/changer.js'%}"></script>
+    <script src="{% static  'js/delete.js'%}"></script>
+    <script src="{% static  'js/open_decision.js'%}"></script>
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+
+
+<!-- Footer -->
+    <br>
+    <br>
+    <br>
+
+
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="#">Пенсионный фонд Российской Федерации </a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+  </body>
+</html>

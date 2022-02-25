@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+    @font-face { font-family: Arial; src: url(/static/fonts/arial.ttf); }
+    body{
+      font-family: Arial, sans-serif;
+    }
+
+
+  </style>
+	<style>
+   table.text  {
+    width:  100%; /* Ширина таблицы */
+    border-spacing: 0; /* Расстояние между ячейками */
+   }
+   table.text td {
+    width: 40%; /* Ширина ячеек */
+    vertical-align: top; /* Выравнивание по верхнему краю */
+   }
+   td.rightcol { /* Правая ячейка */
+    text-align: right; /* Выравнивание по правому краю */
+   }
+
+    td.centercol { /* Правая ячейка */
+    text-align: center; /* Выравнивание по правому краю */
+   }
+
+   body {
+
+    font-size: 180%; /* Размер шрифта в процентах */
+   }
+ p {
+    text-indent: 20px; /* Отступ первой строки в пикселах */
+   }
+
+
+  </style>
+</head>
+
+<body>
+<br>
+<br>
+    <!-- Content for Static Frame 'header_frame' -->
+
+
+<table class="text">
+   <tr>
+    <td><h1></h1></td>
+    <td class="rightcol">На фирменном бланке*</td>
+   </tr>
+  </table>
+	<br>
+	<br>
+
+<table class="text">
+   <tr>
+    <td>Письмо носит <br>информационный <br>характер</td>
+    <td class="rightcol">{{fio}}</td>
+   </tr>
+  </table>
+
+<table class="text">
+   <tr>
+    <td><h1></h1></td>
+    <td class="rightcol">{{addres}}</td>
+   </tr>
+  </table>
+
+
+
+    <p>Управление установления пенсий ГУ – Отделения ПФР по РС(Я) направляет решение о приостановлении срока рассмотрения
+заявления об установлении {{types_of_pension}} в связи с {{cause}} документов, необходимых для
+установления пенсии или иной выплаты.
+    </p>
+<p>О восстановлении срока рассмотрения заявления будет сообщено дополнительно.
+</p>
+
+<p>Приложение: на 1 л</p>
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+<center>Начальник отдела ____________________________  ______________ </center>
+
+</body>
+</html>

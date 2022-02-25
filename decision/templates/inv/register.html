@@ -1,0 +1,74 @@
+{% extends 'inv/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<center><h1>Добавить пользователя</h1></center>
+
+<form method="POST">
+      {% csrf_token %}
+    <div class="container col-md-20 edit_box" >
+
+
+
+    <div class="row">
+      <div class="col-6">
+       {{ form.email|as_crispy_field }}
+      </div>
+      <div class="col-6">
+         {{ form.username|as_crispy_field }}
+      </div>
+    </div>
+
+            <div class="row">
+      <div class="col-6">
+       {{ form.otdel|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.rayon|as_crispy_field }}
+      </div>
+    </div>
+
+           <div class="row">
+      <div class="col-6">
+      {{ form.role|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.is_admin|as_crispy_field }}
+      </div>
+    </div>
+
+                   <div class="row">
+      <div class="col-6">
+        {{ form.password1|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.password2|as_crispy_field }}
+      </div>
+    </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+<br>
+
+    <center><button type="submit" class="btn btn-outline-primary">Добавить</button></center>
+</form>
+
+
+
+
+
+
+
+
+<br>
+<br>
+
+{% endblock %}

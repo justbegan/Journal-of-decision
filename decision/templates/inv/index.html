@@ -1,0 +1,257 @@
+{% extends 'inv/base.html' %}
+{% load static %}
+{% block body %}
+{% load crispy_forms_tags %}
+{% if header == "decision" %}
+ <form method="get">
+     <div class="card card-body">
+<div class="form-group">
+  <div class="row">
+      <div class="col">
+
+
+
+    <div class="row">
+      <div class="col-3">
+       {{myFilter.form.fio|as_crispy_field}}
+      </div>
+
+      <div class="col-3">
+       {{myFilter.form.snils|as_crispy_field}}
+      </div>
+
+         <div class="col-3">
+       {{myFilter.form.statement_reg_num|as_crispy_field}}
+      </div>
+
+           <div class="col-3">
+       {{myFilter.form.decision_number|as_crispy_field}}
+      </div>
+    </div>
+
+
+             <div class="row">
+      <div class="col-3">
+       {{myFilter.form.start_date|as_crispy_field}}
+      </div>
+
+      <div class="col-3">
+       {{myFilter.form.end_date|as_crispy_field}}
+      </div>
+
+         <div class="col-3">
+
+      </div>
+
+           <div class="col-3">
+
+      </div>
+    </div>
+          <button class="btn btn-outline-primary col-1" type="submit" name="find">Фильтр</button>
+
+      </div>
+
+      </div>
+
+    </div>
+     </div>
+
+     <br>
+             <button class="btn btn-outline-primary col-2" type="submit" name="export">Выгрузить список</button>
+             <a class="btn btn-outline-primary" href="{% url 'add_decision' %}">Добавить решение</a>
+
+</form>
+
+
+
+{%endif%}
+
+<div class="button-group">
+<center><h2>{{page_title}}</h2></center>
+{% if header == "dis_stats" %}
+<center><a  href="{% url 'dis_stats_ulus' %}" class="btn btn-outline-warning" role="button" >По улусам <img src="{% static '/images/swap.png'%}" height="20px"></a></center>
+
+
+
+{% elif header == "dis_stats_ulus" %}
+<center><a class="btn btn-outline-warning" role="button" href="{% url 'index' %}" >По отделам <img src="{% static '/images/swap.png'%}" height="20px"></a></center>
+{% elif header == "art_and_pens" %}
+<center><a class="btn btn-outline-primary" href="{% url 'add_art_and_pens' %}">Добавить</a></center>
+{% elif header == "account" %}
+<center><a class="btn btn-outline-primary" href="{% url 'add_account' %}">Добавить</a></center>
+
+{%endif%}
+
+</div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        {% for item in title_list %}
+       <th> {{item}}</th>
+
+        {%endfor%}
+
+
+
+      </tr>
+    </thead>
+         <script language="JavaScript">
+        function toggle(source){
+        checkboxes = document.getElementsByName('delete_prod');
+        for(var i=0, n=checkboxes.length;i<n;i++){
+        checkboxes[i].checked = source.checked;
+        }
+        }
+
+
+        </script>
+
+
+
+
+    <tbody id="g_table">
+
+    <form method="post" >
+        {%csrf_token%}
+      {% if header == "decision" %}
+      {% for item in items %}
+      <tr id="g_list" class="g_list">
+        <td>{{ item.pk }}</td>
+        <td id="r_status">{{ item.dec_status }} </td>
+        <td>{{ item.usr_departament_code }} </td>
+        <td>{{ item.usr_district_code }} </td>
+        <td>{{ item.snils }} </td>
+        <td>{{ item.fio }} </td>
+        <td id="r_time">{{ item.recovery_time }} </td>
+
+        <td>
+
+            <a href="{% url 'edit_decision' item.pk %}" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true" >Откр</a>
+        <a href="{% url 'delete_decision' item.pk%}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true" onclick="return veryfy();">Удал.</a>
+        </td>
+
+      </tr>
+      {% endfor %}
+
+      {% elif header == "article_cl" %}
+
+      {% for item in items %}
+
+            <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.title }} </td>
+        <td>{{ item.code }} </td>
+
+      </tr>
+      {% endfor %}
+      {% elif header == "pension_type_cl" %}
+
+      {% for item in items %}
+
+            <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.title }} </td>
+        <td>{{ item.code }} </td>
+
+      </tr>
+      {% endfor %}
+
+      {% elif header == "chrono" %}
+
+      {% for item in items %}
+
+            <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.snils }} </td>
+        <td>{{ item.add_time }} </td>
+        <td>{{ item.user_fio }} </td>
+        <td>{{ item.note}} </td>
+
+
+
+
+      </tr>
+      {% endfor %}
+
+      {% elif header == "dis_stats" %}
+
+      {% for item in items %}
+
+            <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.otdel_name }} </td>
+        <td>{{ item.quantity }} </td>
+        <td>{{ item.over_dec }} </td>
+        <td>{{ item.last_day}} </td>
+        <td>{{ item.left_3_day}} </td>
+
+
+
+
+      </tr>
+      {% endfor %}
+
+      {% elif header == "dis_stats_ulus" %}
+
+      {% for item in items %}
+
+            <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.ulus_name }} </td>
+        <td>{{ item.quantity }} </td>
+        <td>{{ item.over_dec }} </td>
+        <td>{{ item.last_day}} </td>
+        <td>{{ item.left_3_day}} </td>
+
+
+
+
+      </tr>
+      {% endfor %}
+
+      {% elif header == "art_and_pens" %}
+        {% for item in items %}
+        <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.appeal_type }} </td>
+        <td>{{ item.law }} </td>
+        <td>{{ item.ground_for_suspension }} </td>
+
+              <td>
+        <a href="{% url 'delete_art_and_pens' item.pk%}" class="btn btn-outline-danger btn-sm" role="button" aria-pressed="true" onclick="return veryfy();">Удал.</a>
+        </td>
+      </tr>
+      {% endfor %}
+
+
+        {% elif header == "account" %}
+
+      {% for item in items %}
+
+            <tr>
+
+        <td>{{ item.pk }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.username }} </td>
+        <td>{{ item.role }} </td>
+
+
+                   <td>
+
+            <a href="{% url 'edit_account' item.pk %}" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true" >Откр</a>
+        </td>
+
+      </tr>
+      {% endfor %}
+
+
+      {% endif %}
+
+
+
+          </form>
+
+
+    </tbody>
+  </table>
+{% endblock %}

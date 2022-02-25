@@ -1,0 +1,133 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+    @font-face { font-family: Arial; src: url(/static/fonts/arial.ttf); }
+    body{
+      font-family: Arial, sans-serif;
+    }
+
+
+  </style>
+	<style>
+   table.text  {
+    width:  100%; /* Ширина таблицы */
+    border-spacing: 0; /* Расстояние между ячейками */
+   }
+   table.text td {
+    width: 40%; /* Ширина ячеек */
+    vertical-align: top; /* Выравнивание по верхнему краю */
+   }
+   td.rightcol { /* Правая ячейка */
+    text-align: right; /* Выравнивание по правому краю */
+   }
+
+    td.centercol { /* Правая ячейка */
+    text-align: center; /* Выравнивание по правому краю */
+   }
+
+   h1 {
+
+    font-size: 166%; /* Размер шрифта в процентах */
+   }
+  </style>
+</head>
+
+<body>
+<br>
+<br>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+    	<center><h1>РЕШЕНИЕ О ПРИОСТАНОВЛЕНИИ СРОКА РАССМОТРЕНИЯ ЗАЯВЛЕНИЯ</h1></center>
+    </div>
+	<br>
+    <br>
+<table class="text">
+   <tr>
+    <td><h1>от {{decision_date}}</h1></td>
+    <td class="rightcol"><h1>№ {{decision_number}}</h1></td>
+   </tr>
+  </table>
+	<br>
+	<br>
+	    <div>
+    	<center><h1>ГУ Управление установления пенсий Отделения Пенсионного Фонда Российской <br>Федерации по Республике Саха (Якутия)</h1></center>
+    </div>
+
+	<div>
+		<h1>В связи с {{ cause }}
+			документов, необходимых для установления  страховой пенсии по старости по заявлению о назначении  страховой пенсии по старости</h1>
+	</div>
+
+	<div>
+	<table class="text">
+   <tr>
+    <td><h1>ФИО</h1></td>
+    <td><h1>____<u>{{fio}}</u>____</h1></td>
+   </tr>
+  </table>
+
+	</div>
+
+	<div>
+	<table class="text">
+   <tr>
+    <td><h1>
+	регистрационный номер заявления
+	</h1></td>
+	   <td class="rightcol"><h1>____<u>{{statement_reg_num}}</u>____</h1></td>
+   </tr>
+  </table>
+	</div>
+
+
+		<div>
+	<table class="text">
+   <tr>
+    <td><h1>
+	дата приема заявления
+	</h1></td>
+	   <td class="rightcol"><h1>____<u>{{appeal_date}}</u>____</h1></td>
+   </tr>
+  </table>
+	</div>
+
+
+    <h1>в соответствии частью 8 статьи 22 Федерального закона от 28.12.2013 № 400-ФЗ «О страховых пенсиях» приняло решение о приостановлении срока рассмотрения заявления в отношении указанной пенсии (выплаты) с
+		{{decision_date}} до даты представления документов, запрошенных в указанных органах, но не более чем на три месяца.</h1>
+<br>
+<br>
+<br>
+<br>
+
+<center><h1> Начальник управления ____________________________  ______________ </h1></center>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+
+
+
+<center><em>Решение направлено гражданину (законному представителю) по почте</em></center>
+</body>
+</html>

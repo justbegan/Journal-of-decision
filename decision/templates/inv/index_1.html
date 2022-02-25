@@ -1,0 +1,113 @@
+{% extends 'inv/base.html' %}
+
+{% block body %}
+
+  <div class="add_buttons">
+
+     <center><div class="button-group">
+      <a href="{% url 'display_mobiles' %}" class="btn btn-primary btn-md btn-trim" role="button">Должники</a>
+      <a href="{% url 'add_mobile' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'display_MSK' %}" class="btn btn-primary btn-md btn-trim" role="button"> Платежи</a>
+      <a href="{% url 'add_MSK' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+      <a href="{% url 'penalty_payer' %}" class="btn btn-primary btn-md btn-trim" role="button">пр.Должники</a>
+      <a href="{% url 'add_penalty_payer' %}" class="btn btn-warning btn-sm btn-pad" role="button"> +</a>
+
+   <a href="{% url 'Stats' %}" class="btn btn-warning btn-sm btn-pad" role="button">Статистика</a>
+      <a href="{% url 'export' %}" class="btn btn-warning btn-sm btn-pad" role="button">Выгрузка</a>
+        <a href="{% url 'MSK_upload' %}" class="btn btn-warning btn-sm btn-pad" role="button">Загрузка</a>
+
+
+    </div> </center>
+
+  </div>
+
+
+
+  <div>
+  </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card card-body">
+
+            <center><div class="col-md-4">
+             <form method="get">
+              <center> ФИО{{myFilter_1.form.fio}}</center>
+               <center>СНИЛС{{myFilter_1.form.snils}}</center>
+                 <center>Вид направления{{myFilter_1.form.vid_napr}}</center>
+
+
+
+
+            <center> <button class="btn btn-primary" type="submit">
+               Поиск
+             </button>
+              </center>
+               </form>
+
+            </div></center>
+
+        </div>
+      </div>
+    </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>ФИО</th>
+        <th>СНИЛС</th>
+        <th>Всего должен</th>
+        <th>Всего уплачено</th>
+        <th>Доп. инфо</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {{inf}}
+      <form method="post">
+        {%csrf_token%}
+      {% for item in items %}
+
+      <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.fio }} </td>
+        <td>{{ item.snils }} </td>
+        <td>{{ item.vsego_doljen }} </td>
+        <td>{{ item.payment_all }} </td>
+        <td>{{ item.dop_info }} </td>
+        <td><input type="checkbox" name="delete_prod" value="{{item.pk}}" id="delete_prod"></td>
+
+
+
+        {% if header|lower == "msk" %}
+        <td>
+            <a href="{% url 'edit_MSK' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" >Отк.</a>
+            <a href="{% url 'delete_MSK' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" >Удал.</a>
+        </td>
+        {% else %}
+        <td>
+            <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" >Отк.</a>
+            <a href="{% url 'delete_mobile' item.pk%}" class="btn btn-danger btn-sm" role="button" aria-pressed="true" >Удал.</a>
+        </td>
+        {% endif %}
+
+
+      </tr>
+
+      {% endfor %}
+
+
+  </form>
+
+    </tbody>
+  </table>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,273 @@
+{% extends 'inv/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+
+
+
+
+
+
+{% if header == "decision" %}
+<form method="POST">
+      {% csrf_token %}
+<div class="form111">
+
+{{ form.usr_departament_code|as_crispy_field }}
+{{ form.decision_number|as_crispy_field }}
+{{ form.user_fio|as_crispy_field }}
+{{ form.decision_number_2|as_crispy_field }}
+{{ form.actual_term|as_crispy_field }}
+
+</div>
+
+
+
+        <div class="container col-md-20 edit_box" >
+
+        <h6>Блок «Заявление»</h6>
+
+    <div class="row">
+      <div class="col-6">
+       {{ form.snils|as_crispy_field }}
+      </div>
+      <div class="col-6">
+
+      </div>
+    </div>
+
+
+
+<button type="button" class="btn btn-outline-primary" id="btn_find_fio">Из НВП</button>
+{% load static %}
+<div class="loader">
+    <center><img src="{% static '/images/abc.gif'%}" height="50px"></center>
+
+</div>
+
+    <div class="row">
+      <div class="col-6">
+       {{ form.dec_status|as_crispy_field }}
+      </div>
+
+     {% if role == "admin" %}
+      <div class="col-6">
+        {{ form.usr_district_code|as_crispy_field }}
+      </div>
+     {%else%}
+        <div class="form111">
+      {{ form.usr_district_code|as_crispy_field }}
+       </div>
+     {%endif%}
+
+    </div>
+
+
+          <div class="row">
+      <div class="col-6">
+        {{ form.fio|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.types_of_pension|as_crispy_field }}
+      </div>
+    </div>
+
+
+      <div class="row">
+      <div class="col-6">
+        {{ form.law|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.appeal_date|as_crispy_field }}
+      </div>
+    </div>
+      <div class="row">
+      <div class="col-6">
+        {{ form.statement_reg_num|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.appeal_type|as_crispy_field }}
+      </div>
+    </div>
+
+
+       <div class="row">
+      <div class="col-6">
+        {{ form.adress|as_crispy_field }}
+      </div>
+      <div class="col-6">
+         {{ form.note|as_crispy_field }}
+      </div>
+    </div>
+
+        </div>
+
+
+
+<div class="container col-md-20 edit_box" >
+    <h6>Блок «Приостановление срока рассмотрения заявления»</h6>
+
+
+
+
+
+      <div class="row">
+      <div class="col-6">
+     {{ form.decision_date|as_crispy_field }}
+      </div>
+      <div class="col-6">
+
+          {{ form.cause|as_crispy_field }}
+      </div>
+    </div>
+
+
+
+
+</div>
+
+
+<div class="container col-md-20 edit_box" >
+    <h6>Блок «Восстановление срока рассмотрения заявления»</h6>
+<div class="container col-md-20 " >
+          <div class="row">
+      <div class="col-6">
+         {{ form.decision_date_block3|as_crispy_field }}
+      </div>
+      <div class="col-6">
+    {{ form.cause_2|as_crispy_field }}
+      </div>
+    </div>
+
+</div>
+
+
+    <div class="container col-md-20 " >
+          <div class="row">
+      <div class="col-6">
+
+      </div>
+      <div class="col-6">
+
+      </div>
+    </div>
+
+</div>
+
+
+
+
+</div>
+
+<br>
+
+    <center><button type="submit" class="btn btn-outline-primary">Добавить</button></center>
+</form>
+    {% elif header == "art_and_pens" %}
+<form method="POST">
+      {% csrf_token %}
+    <div class="container col-md-20 edit_box" >
+
+
+
+    <div class="row">
+      <div class="col-6">
+       {{ form.appeal_type|as_crispy_field }}
+      </div>
+      <div class="col-6">
+
+      </div>
+    </div>
+
+
+      <div class="row">
+      <div class="col-6">
+       {{ form.law|as_crispy_field }}
+      </div>
+      <div class="col-6">
+
+      </div>
+    </div>
+
+
+
+            <div class="row">
+      <div class="col-6">
+       {{ form.ground_for_suspension|as_crispy_field }}
+      </div>
+      <div class="col-6">
+
+      </div>
+    </div>
+    </div>
+
+
+<br>
+
+    <center><button type="submit" class="btn btn-outline-primary">Добавить</button></center>
+</form>
+
+
+
+
+
+{% elif header == "account" %}
+<center><h1>Добавить пользователя</h1></center>
+
+<form method="POST">
+      {% csrf_token %}
+    <div class="container col-md-20 edit_box" >
+
+
+
+    <div class="row">
+      <div class="col-6">
+       {{ form.email|as_crispy_field }}
+      </div>
+      <div class="col-6">
+         {{ form.username|as_crispy_field }}
+      </div>
+    </div>
+
+            <div class="row">
+      <div class="col-6">
+       {{ form.otdel|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.rayon|as_crispy_field }}
+      </div>
+    </div>
+
+           <div class="row">
+      <div class="col-6">
+      {{ form.role|as_crispy_field }}sss
+      </div>
+      <div class="col-6">
+        {{ form.is_admin|as_crispy_field }}
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+<br>
+
+    <center><button type="submit" class="btn btn-outline-primary">Добавить</button></center>
+</form>
+
+
+
+
+    {% endif %}
+
+
+
+<br>
+<br>
+
+{% endblock %}

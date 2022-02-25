@@ -1,0 +1,94 @@
+{% extends 'inv/base.html' %}
+
+{% block body %}
+
+
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Снилс</th>
+        <th>Время добавления</th>
+        <th>Логин специалиста</th>
+        <th>Примечание</th>
+   
+
+
+          <th><input type="checkbox" onclick="toggle(this)"/></th>
+
+      </tr>
+    </thead>
+         <script language="JavaScript">
+        function toggle(source){
+        checkboxes = document.getElementsByName('delete_prod');
+        for(var i=0, n=checkboxes.length;i<n;i++){
+        checkboxes[i].checked = source.checked;
+        }
+        }
+
+
+        </script>
+
+
+
+
+    <tbody>
+
+
+    <form method="post">
+        {%csrf_token%}
+      {% for item in items %}
+
+      <tr>
+        <td>{{ item.pk }}</td>
+        <td>{{ item.ch_snils }} </td>
+        <td>{{ item.add_time }} </td>
+        <td>{{ item.user_fio }} </td>
+        <td>{{ item.note }} </td>
+
+
+
+          <td><input type="checkbox" name="delete_prod" value="{{item.pk}}" id="delete_prod"></td>
+            {% if header|lower == "msk" %}
+        <td>
+            <a href="{% url 'edit_decision' item.pk %}" class="btn btn-warning btn-sm" role="button" aria-pressed="true" >Откр</a>
+
+        </td>
+
+        {% endif %}
+
+
+
+      </tr>
+
+
+      {% endfor %}
+
+
+
+
+
+
+
+           <script language="JavaScript">
+        function veryfy(){
+        if (confirm("Потвердить"))
+        {
+            return true;
+        }
+        else
+        {
+        return false;
+        }
+        }
+
+
+        </script>
+          </form>
+
+
+    </tbody>
+  </table>
+
+{% endblock %}
